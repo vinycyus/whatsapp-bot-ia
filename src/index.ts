@@ -57,7 +57,7 @@ wppconnect.create({
     console.clear();
     console.log('Tentativas:', attempts);
     if (urlCode) {
-      qrcode.generate(urlCode, { small: true }); // <- menor QR
+      qrcode.generate(urlCode, { small: true });
     } else {
       console.error('URL code is undefined, cannot generate QR code.');
     }
@@ -75,7 +75,15 @@ wppconnect.create({
     '--no-zygote',
     '--single-process'
   ]
+})
+.then((client) => {
+  start(client); // <- isso aqui ativa o onMessage!
+})
+.catch((error) => {
+  console.error('Erro ao iniciar o cliente:', error);
 });
+
+
 
 
 async function start(client: wppconnect.Whatsapp): Promise<void> {
