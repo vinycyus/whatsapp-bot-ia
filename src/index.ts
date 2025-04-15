@@ -28,7 +28,7 @@ if (
     'Para utilizar o GPT você precisa colocar no .env a sua key da openai e o id do seu assistante.'
   );
 }
-
+/*
 wppconnect
   .create({
     session: 'sessionName',
@@ -47,6 +47,27 @@ wppconnect
   .catch((erro) => {
     console.log(erro);
   });
+*/
+wppconnect
+  .create({
+    session: 'sessionName',
+    catchQR: (base64Qrimg, asciiQR, attempts, urlCode) => {
+      console.log('Terminal qrcode: ', asciiQR);
+    },
+    statusFind: (statusSession, session) => {
+      console.log('Status Session: ', statusSession);
+      console.log('Session name: ', session);
+    },
+    headless: true,
+    browserArgs: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-gpu',
+      '--no-zygote',
+      '--single-process'
+    ]
+  })
 
 async function start(client: wppconnect.Whatsapp): Promise<void> {
   client.onMessage((message) => {
