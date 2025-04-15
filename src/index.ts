@@ -48,26 +48,35 @@ wppconnect
     console.log(erro);
   });
 */
-wppconnect
-  .create({
-    session: 'sessionName',
-    catchQR: (base64Qrimg, asciiQR, attempts, urlCode) => {
-      console.log('Terminal qrcode: ', asciiQR);
-    },
-    statusFind: (statusSession, session) => {
-      console.log('Status Session: ', statusSession);
-      console.log('Session name: ', session);
-    },
-    headless: true,
-    browserArgs: [
-      '--no-sandbox',
-      '--disable-setuid-sandbox',
-      '--disable-dev-shm-usage',
-      '--disable-gpu',
-      '--no-zygote',
-      '--single-process'
-    ]
-  })
+
+import qrcode from 'qrcode-terminal';
+
+wppconnect.create({
+  session: 'sessionName',
+  catchQR: (base64Qrimg, asciiQR, attempts, urlCode) => {
+    console.clear();
+    console.log('Tentativas:', attempts);
+    if (urlCode) {
+      qrcode.generate(urlCode, { small: true }); // <- menor QR
+    } else {
+      console.error('URL code is undefined, cannot generate QR code.');
+    }
+  },
+  statusFind: (statusSession, session) => {
+    console.log('Status Session: ', statusSession);
+    console.log('Session name: ', session);
+  },
+  headless: true,
+  browserArgs: [
+    '--no-sandbox',
+    '--disable-setuid-sandbox',
+    '--disable-dev-shm-usage',
+    '--disable-gpu',
+    '--no-zygote',
+    '--single-process'
+  ]
+});
+
 
 async function start(client: wppconnect.Whatsapp): Promise<void> {
   client.onMessage((message) => {
