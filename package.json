@@ -29,10 +29,16 @@
     "dotenv": "^16.3.2",
     "inquirer": "^9.2.15",
     "openai": "^4.24.2",
-    "sharp": "^0.34.1"
+    "qrcode": "^1.5.4",
+    "qrcode-terminal": "^0.12.0",
+    "sharp": "^0.34.1",
+    "terminal-kit": "^3.1.2"
   },
   "devDependencies": {
     "@types/node": "^20.11.8",
+    "@types/qrcode": "^1.5.5",
+    "@types/qrcode-terminal": "^0.12.2",
+    "@types/terminal-kit": "^2.5.7",
     "@typescript-eslint/eslint-plugin": "^6.4.0",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",

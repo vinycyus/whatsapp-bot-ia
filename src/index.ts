@@ -49,19 +49,25 @@ wppconnect
   });
 */
 
-import qrcode from 'qrcode-terminal';
+import { terminal as term } from 'terminal-kit';
+import qrcode from 'qrcode';
+
 
 wppconnect.create({
   session: 'sessionName',
-  catchQR: (base64Qrimg, asciiQR, attempts, urlCode) => {
+  catchQR: async (base64Qrimg, asciiQR, attempts, urlCode) => {
     console.clear();
     console.log('Tentativas:', attempts);
+  
     if (urlCode) {
-      qrcode.generate(urlCode, { small: true });
+      const qrText = await qrcode.toString(urlCode, { type: 'terminal' });
+      term(qrText);
     } else {
-      console.error('URL code is undefined, cannot generate QR code.');
+      console.error('URL code está undefined!');
     }
   },
+  
+  
   statusFind: (statusSession, session) => {
     console.log('Status Session: ', statusSession);
     console.log('Session name: ', session);
