@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_KEY!);
-const model = genAI.getGenerativeModel({ model: 'gemini-1.5-pro' });
+const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
 const activeChats = new Map<string, any>();
 
@@ -22,7 +22,7 @@ const getOrCreateChatSession = (chatId: string): ChatSession => {
       parts: [
         {
           text: process.env.GEMINI_PROMPT ??
-            'Olá! Seja bem-vindo(a) ao Assistente Virtual do Colégio Velho Chico!',
+            'Olá! Seja bem-vindo(a) ao Assistente Virtual do Portal registro!',
         },
       ],
     },
